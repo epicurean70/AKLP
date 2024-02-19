@@ -1,0 +1,49 @@
+[server]
+host: 0.0.0.0
+port: 7125
+
+[data_store]
+temperature_store_size: 600
+gcode_store_size: 1000
+
+[authorization]
+force_logins: True
+cors_domains:
+  *.local
+  *.lan
+  *://app.fluidd.xyz
+
+trusted_clients:
+  192.168.1.0/24
+  127.0.0.1
+  FE80::/10
+  ::1/128
+
+# enables partial support of Octoprint API
+[octoprint_compat]
+
+# enables moonraker to track and store print history.
+[history]
+
+# this enables moonraker's update manager
+[update_manager]
+enable_auto_refresh: True
+
+# this enabled fluidd updates
+[update_manager client fluidd]
+type: web
+repo: fluidd-core/fluidd
+path: ~/fluidd
+
+#[file_manager]
+#config_path: ~/klipper_config
+#log_path: ~/klipper_logs
+
+[update_manager KlipperScreen]
+type: git_repo
+path: ~/KlipperScreen
+origin: https://github.com/jordanruthe/KlipperScreen.git
+env: ~/.KlipperScreen-env/bin/python
+requirements: scripts/KlipperScreen-requirements.txt
+install_script: scripts/KlipperScreen-install.sh
+managed_services: KlipperScreen
